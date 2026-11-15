@@ -112,21 +112,19 @@ class _FilesHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(18, 18, 10, 14),
-      child: Expanded(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Downloads',
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              '$count ${count == 1 ? 'file' : 'files'} available',
-              style: const TextStyle(color: Color(0xFF52705A)),
-            ),
-          ],
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Downloads',
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            '$count ${count == 1 ? 'file' : 'files'} available',
+            style: const TextStyle(color: Color(0xFF52705A)),
+          ),
+        ],
       ),
     );
   }

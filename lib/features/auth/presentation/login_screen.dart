@@ -15,10 +15,12 @@ class LoginScreen extends StatelessWidget {
       builder: (context, ref, _) {
         final loading = ref.watch(loginLoadingProvider);
         final error = ref.watch(loginErrorProvider);
+        final enteredUsername = ref.watch(loginUsernameProvider);
+        final enteredPassword = ref.watch(loginPasswordProvider);
 
         Future<void> login() async {
-          final username = ref.read(loginUsernameProvider).trim();
-          final password = ref.read(loginPasswordProvider);
+          final username = enteredUsername.trim();
+          final password = enteredPassword;
           if (username.isEmpty || password.isEmpty) {
             ref.read(loginErrorProvider.notifier).state =
                 'Enter both username and password.';
@@ -82,7 +84,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 16),
-                      _PasswordField(ref: ref),
+                      const _PasswordField(),
                       if (error != null) ...[
                         const SizedBox(height: 14),
                         Text(
@@ -119,9 +121,7 @@ class LoginScreen extends StatelessWidget {
 }
 
 class _PasswordField extends StatelessWidget {
-  const _PasswordField({required this.ref});
-
-  final WidgetRef ref;
+  const _PasswordField();
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +131,7 @@ class _PasswordField extends StatelessWidget {
 
         return TextField(
           onChanged: (value) =>
-              this.ref.read(loginPasswordProvider.notifier).state = value,
+              ref.read(loginPasswordProvider.notifier).state = value,
           obscureText: obscurePassword,
           decoration: InputDecoration(
             labelText: 'Password',
